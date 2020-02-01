@@ -18,9 +18,14 @@ public class GameManager : MonoBehaviour
     public List<Enemy> priorEnemies;
     public int maxPrior = 0;
 
+    public int numberOfBoxes;
     private Text levelText; //Text to display current level number.
     private GameObject levelImage;
     private bool musicOn = false;
+
+    private GameObject ToolIcon1;
+    private GameObject ToolIcon2;
+    private GameObject ToolIcon3;
 
     private Transform MainHeroPos;
     public TimerScript ts;
@@ -75,6 +80,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void setNumOfBoxes(int numOfBoxes)
+    {
+        numberOfBoxes = numOfBoxes;
+
+        if (numberOfBoxes == 1)
+        {
+            ToolIcon1.SetActive(true);
+        }
+        if (numberOfBoxes == 2)
+        {
+            ToolIcon2.SetActive(true);
+        }
+        if (numberOfBoxes == 3)
+        {
+            ToolIcon3.SetActive(true);
+        }
+        
+    }
+
     void InitGame()
     {
         //Get a reference to our image LevelImage by finding it by name.
@@ -82,9 +106,18 @@ public class GameManager : MonoBehaviour
 
         //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
-
+        
+        ToolIcon1 = GameObject.Find("ToolIcon1");
+        ToolIcon2 = GameObject.Find("ToolIcon2");
+        ToolIcon3 = GameObject.Find("ToolIcon3");
+        
         levelImage.SetActive(false);
         levelText.text = "";
+        
+        ToolIcon1.SetActive(false);
+        ToolIcon2.SetActive(false);
+        ToolIcon3.SetActive(false);
+        
         gameStarted = false;
         gameOver = false;
     }

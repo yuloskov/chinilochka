@@ -14,6 +14,7 @@ public class Enemy : CharacterController2D
 {
     public int prior = -1;
     private Text PriorityText;
+
     protected override void Start()
     {
         base.Start();
@@ -35,7 +36,6 @@ public class Enemy : CharacterController2D
             PriorityText = GameObject.Find("PriorityText" + prior.ToString()).GetComponent<Text>();
             PriorityText.text = prior.ToString();
             PriorityText.transform.position = new Vector3(0.1f, 0.8f, 0) + transform.position;
-            
         }
     }
 
@@ -43,12 +43,16 @@ public class Enemy : CharacterController2D
     {
         if (GameManager.instance.gameStarted)
         {
-            PriorityText = GameObject.Find("PriorityText" + prior.ToString()).GetComponent<Text>();
-            Destroy(PriorityText.gameObject);
+            GameObject PriorityObj = GameObject.Find("PriorityText" + prior.ToString());
+            if (PriorityObj != null)
+            {
+                PriorityText = PriorityObj.GetComponent<Text>();
+                Destroy(PriorityText.gameObject);
+            }
         }
+
         if (fight)
         {
-            
             passedTime += Time.deltaTime;
             if (passedTime >= attackRate)
             {

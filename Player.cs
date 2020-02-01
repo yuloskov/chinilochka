@@ -30,6 +30,7 @@ public class Player : CharacterController2D
                 Destroy(tools[i].gameObject);
                 tools.RemoveAt(i);
                 numberOfBoxes++;
+                GameManager.instance.setNumOfBoxes(numberOfBoxes);
             }
         }
 
