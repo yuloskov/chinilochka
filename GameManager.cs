@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     private List<Enemy> enemies; //List of all Enemy units, used to issue them move commands.
+    private List<Tool> tools; 
     private bool gameOver = false;
 
     public bool gameStarted;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         }
 
         enemies = new List<Enemy>();
+        tools = new List<Tool>();
         priorEnemies = new List<Enemy>();
 
 
@@ -49,6 +51,16 @@ public class GameManager : MonoBehaviour
     {
         //Add Enemy to List enemies.
         enemies.Add(script);
+    }
+    
+    public void AddToolToList(Tool script)
+    {
+        tools.Add(script);
+    }
+
+    public List<Tool> getTools()
+    {
+        return tools;
     }
 
     public void AddEnemyToPriorList(Enemy e)
@@ -86,7 +98,6 @@ public class GameManager : MonoBehaviour
         
         if (gameStarted)
         {
-            
             if (!gameOver)
             {    
                 gameOver = MoveEnemies();
