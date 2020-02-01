@@ -22,7 +22,7 @@ public class Enemy : CharacterController2D
         pos = transform;
         health = 100;
         speed = 2;
-        attack = 40;
+        attack = 5;
         attackRate = 0.3f;
         passedTime = attackRate;
 

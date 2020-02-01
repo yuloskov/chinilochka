@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private List<Tool> tools; 
     public bool gameOver = false;
 
+
     public bool gameStarted;
 
     public List<Enemy> priorEnemies;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     private GameObject levelImage;
     private bool musicOn = false;
 
+    private int numOfAliveEnemies;
+    
     private GameObject ToolIcon1;
     private GameObject ToolIcon2;
     private GameObject ToolIcon3;
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
         //Add Enemy to List enemies.
         enemies.Add(script);
     }
-    
+
     public void AddToolToList(Tool script)
     {
         tools.Add(script);
@@ -78,6 +81,8 @@ public class GameManager : MonoBehaviour
             priorEnemies.Add(e);
             maxPrior++;
         }
+
+        numOfAliveEnemies++;
     }
 
     public void setNumOfBoxes(int numOfBoxes)
@@ -88,15 +93,16 @@ public class GameManager : MonoBehaviour
         {
             ToolIcon1.SetActive(true);
         }
+
         if (numberOfBoxes == 2)
         {
             ToolIcon2.SetActive(true);
         }
+
         if (numberOfBoxes == 3)
         {
             ToolIcon3.SetActive(true);
         }
-        
     }
 
     void InitGame()
@@ -106,18 +112,19 @@ public class GameManager : MonoBehaviour
 
         //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        
+
         ToolIcon1 = GameObject.Find("ToolIcon1");
         ToolIcon2 = GameObject.Find("ToolIcon2");
         ToolIcon3 = GameObject.Find("ToolIcon3");
-        
+
         levelImage.SetActive(false);
         levelText.text = "";
-        
+
         ToolIcon1.SetActive(false);
         ToolIcon2.SetActive(false);
         ToolIcon3.SetActive(false);
-        
+
+
         gameStarted = false;
         gameOver = false;
     }
@@ -126,19 +133,23 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!gameStarted)
-        {    
+        {
             gameStarted = ts.Run();
+            
         }
         
-        if (gameStarted)
+        Debug.Log(numOfAliveEnemies);
+        
+        if (gameStarted && numOfAliveEnemies > 0)
         {
             if (!musicOn)
             {
                 GameObject.Find("Background").GetComponent<AudioSource>().mute = false;
                 musicOn = true;
             }
+
             if (!gameOver)
-            {    
+            {
                 gameOver = MoveEnemies();
             }
             else
@@ -148,6 +159,11 @@ public class GameManager : MonoBehaviour
                 levelText.text = "GAME OVER";
             }
         }
+        else if (gameStarted && numOfAliveEnemies == 0)
+        {
+            levelImage.SetActive(true);
+            levelText.text = "YOU WON";
+        }
     }
 
     //Coroutine to move enemies in sequence.
@@ -156,7 +172,7 @@ public class GameManager : MonoBehaviour
         var gameOver = false;
         //Loop through List of Enemy objects.
         for (int i = 0; i < enemies.Count; i++)
-        {    
+        {
             // Not dead
             if (enemies[i].health > 0 && !enemies[i].fight)
             {
@@ -165,5 +181,10 @@ public class GameManager : MonoBehaviour
         }
 
         return gameOver;
+    }
+
+    public void MinusEnemy()
+    {
+        numOfAliveEnemies--;
     }
 }

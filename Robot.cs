@@ -48,6 +48,7 @@ public class Robot : CharacterController2D
                     if (Attack(refPrior[curAttackI]))
                     {
                         Destroy(refPrior[curAttackI].gameObject);
+                        GameManager.instance.MinusEnemy();
                         curAttackI++;
                     }
                     else
