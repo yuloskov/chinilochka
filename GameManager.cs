@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         // Not added yet
         if (e.prior == -1)
         {
-            e.prior = maxPrior;
+            e.prior = maxPrior + 1;
             priorEnemies.Add(e);
             maxPrior++;
         }

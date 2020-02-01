@@ -1,18 +1,25 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using Completed;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Enemy : CharacterController2D
 {
     public int prior = -1;
+    private Text PriorityText;
     protected override void Start()
     {
         base.Start();
         GameManager.instance.AddEnemyToList(this);
         pos = transform;
         health = 100;
-
         health = 100;
         speed = 2;
         attack = 5;
@@ -25,13 +32,23 @@ public class Enemy : CharacterController2D
         if (Input.GetButtonDown("Fire1"))
         {
             GameManager.instance.AddEnemyToPriorList(this);
+            PriorityText = GameObject.Find("PriorityText" + prior.ToString()).GetComponent<Text>();
+            PriorityText.text = prior.ToString();
+            PriorityText.transform.position = new Vector3(0.1f, 0.4f, 0) + transform.position;
+            
         }
     }
 
     protected void Update()
     {
+        if (GameManager.instance.gameStarted)
+        {
+            PriorityText = GameObject.Find("PriorityText" + prior.ToString()).GetComponent<Text>();
+            Destroy(PriorityText.gameObject);
+        }
         if (fight)
         {
+            
             passedTime += Time.deltaTime;
             if (passedTime >= attackRate)
             {
