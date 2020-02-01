@@ -34,7 +34,7 @@ public class Enemy : CharacterController2D
             GameManager.instance.AddEnemyToPriorList(this);
             PriorityText = GameObject.Find("PriorityText" + prior.ToString()).GetComponent<Text>();
             PriorityText.text = prior.ToString();
-            PriorityText.transform.position = new Vector3(0.1f, 0.4f, 0) + transform.position;
+            PriorityText.transform.position = new Vector3(0.1f, 0.8f, 0) + transform.position;
             
         }
     }
