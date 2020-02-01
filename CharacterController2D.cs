@@ -53,7 +53,7 @@ public abstract class CharacterController2D : MonoBehaviour
     {
         fight = true;
         e.fight = true;
-        e.fightWith = e;
+        e.fightWith = this;
         e.health -= attack;
         return (e.health <= 0);
     }

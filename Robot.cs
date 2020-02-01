@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Robot : CharacterController2D
 {
@@ -15,9 +16,11 @@ public class Robot : CharacterController2D
 
         health = 100;
         speed = 3;
-        attack = 10;
-        attackRate = 1.5f;
+        attack = 30;
+        attackRate = 0.1f;
         passedTime = attackRate;
+
+        hb = GetComponentInChildren<Image>();
         
         refPrior = GameManager.instance.priorEnemies;
     }
@@ -25,6 +28,11 @@ public class Robot : CharacterController2D
     // Update is called once per frame
     protected void Update()
     {
+        if (health <= 0)
+        {
+            GameManager.instance.gameOver = true;
+        }
+        hb.fillAmount = health / 100;
         if (curAttackI == -1)
         {
             curAttackI = refPrior.Count > 0 ? 0 : -1;

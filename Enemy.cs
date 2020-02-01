@@ -22,8 +22,8 @@ public class Enemy : CharacterController2D
         pos = transform;
         health = 100;
         speed = 2;
-        attack = 5;
-        attackRate = 0.9f;
+        attack = 40;
+        attackRate = 0.3f;
         passedTime = attackRate;
 
         hb = GetComponentInChildren<Image>();
@@ -58,7 +58,7 @@ public class Enemy : CharacterController2D
             if (passedTime >= attackRate)
             {
                 passedTime = 0;
-//                Attack(fightWith);
+                Attack(fightWith);
             }
         }
     }

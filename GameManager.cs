@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     private List<Enemy> enemies; //List of all Enemy units, used to issue them move commands.
     private List<Tool> tools; 
-    private bool gameOver = false;
+    public bool gameOver = false;
 
     public bool gameStarted;
 
