@@ -46,10 +46,13 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         //Get a reference to our image LevelImage by finding it by name.
-        // levelImage = GameObject.Find("LevelImage");
-			     //
-        // //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
-        // levelText = GameObject.Find("LevelText").GetComponent<Text>();
+         levelImage = GameObject.Find("LevelImage");
+
+         //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
+         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+         
+         levelImage.SetActive(false);
+         levelText.text = "";
     }
 
     // Update is called once per frame
@@ -58,6 +61,11 @@ public class GameManager : MonoBehaviour
         if (!gameOver)
         {
             gameOver = MoveEnemies();
+        }
+        else
+        {
+            levelImage.SetActive(true);
+            levelText.text = "GAME OVER";
         }
     }
 

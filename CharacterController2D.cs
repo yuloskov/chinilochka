@@ -35,7 +35,7 @@ public abstract class CharacterController2D : MonoBehaviour
 
         var dist = Vector3.Distance(thisPosition, toPosition);
 
-        return (dist < 8.5f);
+        return (dist < 1.6f);
     }
     
 }

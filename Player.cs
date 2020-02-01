@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayer : CharacterController2D
+public class Player : CharacterController2D
 {
+    public int maxHP = 100;
+    public int curHP = 100;
     protected override void Start()
     {
         base.Start();

@@ -5,6 +5,8 @@ namespace Completed
 {
     public class Enemy : CharacterController2D
     {
+        public int maxHP = 100;
+        public int curHP = 100;
         protected override void Start()
         {
             base.Start();
