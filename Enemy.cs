@@ -12,6 +12,7 @@ public class Enemy : CharacterController2D
         base.Start();
         GameManager.instance.AddEnemyToList(this);
         pos = transform;
+        health = 100;
         speed = 2;
     }
 

@@ -12,13 +12,16 @@ public class GameManager : MonoBehaviour
     private List<Enemy> enemies; //List of all Enemy units, used to issue them move commands.
     private bool gameOver = false;
 
+    public bool gameStarted;
+
     public List<Enemy> priorEnemies;
     public int maxPrior = 0;
-    
-    private Text levelText;									//Text to display current level number.
+
+    private Text levelText; //Text to display current level number.
     private GameObject levelImage;
 
     private Transform MainHeroPos;
+    public TimerScript ts;
 
     private void Awake()
     {
@@ -33,7 +36,8 @@ public class GameManager : MonoBehaviour
 
         enemies = new List<Enemy>();
         priorEnemies = new List<Enemy>();
-        
+
+
         MainHeroPos = GameObject.FindGameObjectWithTag("Player").transform;
 
         DontDestroyOnLoad(gameObject);
@@ -61,26 +65,37 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         //Get a reference to our image LevelImage by finding it by name.
-         levelImage = GameObject.Find("LevelImage");
+        levelImage = GameObject.Find("LevelImage");
 
-         //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
-         levelText = GameObject.Find("LevelText").GetComponent<Text>();
-         
-         levelImage.SetActive(false);
-         levelText.text = "";
+        //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
+
+        levelImage.SetActive(false);
+        levelText.text = "";
+        gameStarted = false;
+        gameOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameOver)
-        {
-            gameOver = MoveEnemies();
+        if (!gameStarted)
+        {    
+            gameStarted = ts.Run();
         }
-        else
+        
+        if (gameStarted)
         {
-            levelImage.SetActive(true);
-            levelText.text = "GAME OVER";
+            
+            if (!gameOver)
+            {    
+                gameOver = MoveEnemies();
+            }
+            else
+            {
+                levelImage.SetActive(true);
+                levelText.text = "GAME OVER";
+            }
         }
     }
 
@@ -90,8 +105,7 @@ public class GameManager : MonoBehaviour
         var gameOver = false;
         //Loop through List of Enemy objects.
         for (int i = 0; i < enemies.Count; i++)
-        {
-            Debug.Log(enemies[i].health);
+        {    
             if (enemies[i].health > 0)
             {
                 gameOver = enemies[i].MoveTo(MainHeroPos, 1.6f);

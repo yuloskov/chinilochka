@@ -34,7 +34,7 @@ public abstract class CharacterController2D : MonoBehaviour
         Move(moveVector.x, moveVector.y, speed);
 
         var dist = Vector3.Distance(thisPosition, toPosition);
-
+        Debug.Log(dist);
         return (dist < r);
     }
     

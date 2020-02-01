@@ -27,7 +27,7 @@ public class Robot : CharacterController2D
         else if (curAttackI >= 0)
         {
             Enemy curAttack = refPrior[curAttackI];
-            if (MoveTo(curAttack.transform, 1.6f))
+            if (GameManager.instance.gameStarted && MoveTo(curAttack.transform, 1.6f))
             {
                 curAttack.health = 0;
                 curAttackI = refPrior.Count > curAttackI+1 ? curAttackI + 1 : -2;
