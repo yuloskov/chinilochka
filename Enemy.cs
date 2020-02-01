@@ -21,11 +21,12 @@ public class Enemy : CharacterController2D
         GameManager.instance.AddEnemyToList(this);
         pos = transform;
         health = 100;
-        health = 100;
         speed = 2;
         attack = 5;
         attackRate = 0.9f;
         passedTime = attackRate;
+
+        hb = GetComponentInChildren<Image>();
     }
 
     private void OnMouseDown()
@@ -50,14 +51,14 @@ public class Enemy : CharacterController2D
                 Destroy(PriorityText.gameObject);
             }
         }
-
+        hb.fillAmount = health / 100;
         if (fight)
         {
             passedTime += Time.deltaTime;
             if (passedTime >= attackRate)
             {
                 passedTime = 0;
-                Attack(fightWith);
+//                Attack(fightWith);
             }
         }
     }
@@ -66,4 +67,5 @@ public class Enemy : CharacterController2D
     {
         Debug.Log(1);
     }
+    
 }

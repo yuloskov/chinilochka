@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 public abstract class CharacterController2D : MonoBehaviour
 { 
     private CharacterController _controller;
@@ -13,6 +15,8 @@ public abstract class CharacterController2D : MonoBehaviour
     public CharacterController2D fightWith = null;
     public bool fight = false;
     public float passedTime;
+
+    public Image hb;
     
     protected virtual void Start()
     {
@@ -28,6 +32,7 @@ public abstract class CharacterController2D : MonoBehaviour
 
     public bool MoveTo(Transform to, float r)
     {
+        if (fight) return true;
         var thisPosition = pos.position;
         var xCur = thisPosition.x;
         var yCur = thisPosition.y;
@@ -46,11 +51,10 @@ public abstract class CharacterController2D : MonoBehaviour
 
     public bool Attack(CharacterController2D e)
     {
-        {
-            e.fight = true;
-            e.fightWith = e;
-            e.health -= attack;
-            return e.health <= 0;
-        }
+        fight = true;
+        e.fight = true;
+        e.fightWith = e;
+        e.health -= attack;
+        return (e.health <= 0);
     }
 }

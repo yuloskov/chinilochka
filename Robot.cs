@@ -15,7 +15,7 @@ public class Robot : CharacterController2D
 
         health = 100;
         speed = 3;
-        attack = 50;
+        attack = 10;
         attackRate = 1.5f;
         passedTime = attackRate;
         
@@ -39,12 +39,12 @@ public class Robot : CharacterController2D
                     passedTime = 0;
                     if (Attack(refPrior[curAttackI]))
                     {
-                        curAttackI = refPrior.Count > curAttackI + 1 ? curAttackI + 1 : -2;
+                        Destroy(refPrior[curAttackI].gameObject);
+                        curAttackI++;
                     }
                     else
                     {
-                        Destroy(refPrior[curAttackI].gameObject);
-                        curAttackI++;
+                        fight = false;
                     }
                 }
             }
