@@ -7,6 +7,13 @@ public abstract class CharacterController2D : MonoBehaviour
     [SerializeField]
     public float speed;
 
+    public float attack;
+    public float attackRate;
+    public float health;
+    public CharacterController2D fightWith = null;
+    public bool fight = false;
+    public float passedTime;
+    
     protected virtual void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -34,8 +41,16 @@ public abstract class CharacterController2D : MonoBehaviour
         Move(moveVector.x, moveVector.y, speed);
 
         var dist = Vector3.Distance(thisPosition, toPosition);
-        Debug.Log(dist);
         return (dist < r);
     }
-    
+
+    public bool Attack(CharacterController2D e)
+    {
+        {
+            e.fight = true;
+            e.fightWith = e;
+            e.health -= attack;
+            return e.health <= 0;
+        }
+    }
 }

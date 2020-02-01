@@ -106,7 +106,8 @@ public class GameManager : MonoBehaviour
         //Loop through List of Enemy objects.
         for (int i = 0; i < enemies.Count; i++)
         {    
-            if (enemies[i].health > 0)
+            // Not dead
+            if (enemies[i].health > 0 && !enemies[i].fight)
             {
                 gameOver = enemies[i].MoveTo(MainHeroPos, 1.6f);
             }
