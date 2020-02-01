@@ -19,6 +19,11 @@ public class Player : CharacterController2D
     }
     void Update()
     {
+        if (GameManager.instance.distRobotPlayer() < 2f && numberOfBoxes > 0)
+        {
+            numberOfBoxes--;
+            GameManager.instance.toHeal = 20;
+        }
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         tools = GameManager.instance.getTools();

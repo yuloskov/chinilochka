@@ -31,7 +31,10 @@ public class GameManager : MonoBehaviour
     private GameObject ToolIcon3;
 
     private Transform MainHeroPos;
+    private Transform RobotPos;
     public TimerScript ts;
+
+    public int toHeal = 0;
 
     private void Awake()
     {
@@ -50,7 +53,8 @@ public class GameManager : MonoBehaviour
 
 
         MainHeroPos = GameObject.FindGameObjectWithTag("Player").transform;
-
+        RobotPos = GameObject.FindGameObjectWithTag("Robot").transform;
+        
         DontDestroyOnLoad(gameObject);
         InitGame();
     }
@@ -186,5 +190,15 @@ public class GameManager : MonoBehaviour
     public void MinusEnemy()
     {
         numOfAliveEnemies--;
+    }
+
+    public float distRobotPlayer()
+    {
+        var thisPosition = RobotPos.position;
+
+        var toPosition = MainHeroPos.position;
+
+        var dist = Vector3.Distance(thisPosition, toPosition);
+        return dist;
     }
 }

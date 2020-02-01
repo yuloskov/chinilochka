@@ -28,6 +28,11 @@ public class Robot : CharacterController2D
     // Update is called once per frame
     protected void Update()
     {
+        if (GameManager.instance.distRobotPlayer() < 2f && health > 0)
+        {
+            health += GameManager.instance.toHeal;
+            GameManager.instance.toHeal = 0;
+        }
         if (health <= 0)
         {
             GameManager.instance.gameOver = true;
@@ -58,5 +63,10 @@ public class Robot : CharacterController2D
                 }
             }
         }
+    }
+
+    public void Heal()
+    {
+        
     }
 }
