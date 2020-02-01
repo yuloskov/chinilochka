@@ -20,18 +20,17 @@ public class Robot : CharacterController2D
     // Update is called once per frame
     protected void Update()
     {
-//        Debug.Log(curAttackI);
         if (curAttackI == -1)
         {
             curAttackI = refPrior.Count > 0 ? 0 : -1;
         }
-        else
+        else if (curAttackI >= 0)
         {
             Enemy curAttack = refPrior[curAttackI];
-            if (MoveTo(curAttack.transform, 3.6f))
+            if (MoveTo(curAttack.transform, 1.6f))
             {
                 curAttack.health = 0;
-                curAttackI = refPrior.Count > curAttackI ? curAttackI + 1 : -1;
+                curAttackI = refPrior.Count > curAttackI+1 ? curAttackI + 1 : -2;
             }
         }
     }
