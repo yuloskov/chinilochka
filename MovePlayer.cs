@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class MovePlayer : CharacterController2D
 {
-    
-    public float speed = 6;
-    
     protected override void Start()
     {
         base.Start();
+
+        speed = 6;
     }
     void Update()
     {

@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     private bool gameOver = false;
     
     private Text levelText;									//Text to display current level number.
-    private GameObject levelImage;		
+    private GameObject levelImage;
+
+    private Transform MainHeroPos;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
         }
 
         enemies = new List<Enemy>();
+        
+        MainHeroPos = GameObject.FindGameObjectWithTag("Player").transform;
 
         DontDestroyOnLoad(gameObject);
         InitGame();
@@ -64,7 +68,7 @@ public class GameManager : MonoBehaviour
         //Loop through List of Enemy objects.
         for (int i = 0; i < enemies.Count; i++)
         {
-            gameOver = enemies[i].MoveEnemy();
+            gameOver = enemies[i].MoveTo(MainHeroPos);
         }
 
         return gameOver;
