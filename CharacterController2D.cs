@@ -19,7 +19,7 @@ public abstract class CharacterController2D : MonoBehaviour
         _controller.Move(move * Time.deltaTime * speed);
     }
 
-    public bool MoveTo(Transform to)
+    public bool MoveTo(Transform to, float r)
     {
         var thisPosition = pos.position;
         var xCur = thisPosition.x;
@@ -35,7 +35,7 @@ public abstract class CharacterController2D : MonoBehaviour
 
         var dist = Vector3.Distance(thisPosition, toPosition);
 
-        return (dist < 1.6f);
+        return (dist < r);
     }
     
 }

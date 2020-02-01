@@ -1,20 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
-namespace Completed
+
+public class Enemy : CharacterController2D
 {
-    public class Enemy : CharacterController2D
+    public int prior = -1;
+    public int health = 100;
+    protected override void Start()
     {
-        public int maxHP = 100;
-        public int curHP = 100;
-        protected override void Start()
+        base.Start();
+        GameManager.instance.AddEnemyToList(this);
+        pos = transform;
+        speed = 2;
+    }
+
+    private void OnMouseDown()
+    {
+        if (Input.GetButtonDown("Fire1"))
         {
-            base.Start();
-            GameManager.instance.AddEnemyToList(this);
-            pos = transform;
-
-            speed = 2;
+            GameManager.instance.AddEnemyToPriorList(this);
         }
-
     }
 }

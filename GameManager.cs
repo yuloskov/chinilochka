@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     private List<Enemy> enemies; //List of all Enemy units, used to issue them move commands.
     private bool gameOver = false;
+
+    public List<Enemy> priorEnemies;
+    public int maxPrior = 0;
     
     private Text levelText;									//Text to display current level number.
     private GameObject levelImage;
@@ -29,6 +32,7 @@ public class GameManager : MonoBehaviour
         }
 
         enemies = new List<Enemy>();
+        priorEnemies = new List<Enemy>();
         
         MainHeroPos = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -41,6 +45,17 @@ public class GameManager : MonoBehaviour
     {
         //Add Enemy to List enemies.
         enemies.Add(script);
+    }
+
+    public void AddEnemyToPriorList(Enemy e)
+    {
+        // Not added yet
+        if (e.prior == -1)
+        {
+            e.prior = maxPrior;
+            priorEnemies.Add(e);
+            maxPrior++;
+        }
     }
 
     void InitGame()
@@ -76,7 +91,11 @@ public class GameManager : MonoBehaviour
         //Loop through List of Enemy objects.
         for (int i = 0; i < enemies.Count; i++)
         {
-            gameOver = enemies[i].MoveTo(MainHeroPos);
+            Debug.Log(enemies[i].health);
+            if (enemies[i].health > 0)
+            {
+                gameOver = enemies[i].MoveTo(MainHeroPos, 1.6f);
+            }
         }
 
         return gameOver;
