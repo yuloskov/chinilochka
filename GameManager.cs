@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private Text levelText; //Text to display current level number.
     private GameObject levelImage;
+    private bool musicOn = false;
 
     private Transform MainHeroPos;
     public TimerScript ts;
@@ -98,12 +99,18 @@ public class GameManager : MonoBehaviour
         
         if (gameStarted)
         {
+            if (!musicOn)
+            {
+                GameObject.Find("Background").GetComponent<AudioSource>().mute = false;
+                musicOn = true;
+            }
             if (!gameOver)
             {    
                 gameOver = MoveEnemies();
             }
             else
             {
+                GameObject.Find("Background").GetComponent<AudioSource>().mute = true;
                 levelImage.SetActive(true);
                 levelText.text = "GAME OVER";
             }
