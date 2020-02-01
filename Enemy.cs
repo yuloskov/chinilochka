@@ -36,8 +36,9 @@ namespace Completed
             Move(moveVector.x, moveVector.y, speed);
 
             var dist = Vector3.Distance(targetPosition, enemyPosition);
-
-            return (dist < 8.5f);
+            
+            Debug.Log(dist);
+            return (dist < 1.8f);
         }
     }
 }
