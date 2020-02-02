@@ -22,8 +22,8 @@ public class Enemy : CharacterController2D
         pos = transform;
         health = 100;
         speed = 2;
-        attack = 5;
-        attackRate = 0.3f;
+        attack = 10;
+        attackRate = 0.5f;
         passedTime = attackRate;
 
         hb = GetComponentInChildren<Image>();

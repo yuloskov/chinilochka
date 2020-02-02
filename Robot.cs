@@ -16,8 +16,8 @@ public class Robot : CharacterController2D
 
         health = 100;
         speed = 3;
-        attack = 30;
-        attackRate = 0.1f;
+        attack = 18;
+        attackRate = 0.5f;
         passedTime = attackRate;
 
         hb = GetComponentInChildren<Image>();

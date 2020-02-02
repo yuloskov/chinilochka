@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         //Add Enemy to List enemies.
         enemies.Add(script);
+        numOfAliveEnemies++;
     }
 
     public void AddToolToList(Tool script)
@@ -86,7 +87,6 @@ public class GameManager : MonoBehaviour
             maxPrior++;
         }
 
-        numOfAliveEnemies++;
     }
 
     public void setNumOfBoxes(int numOfBoxes)
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
                 levelText.text = "GAME OVER";
             }
         }
-        else if (gameStarted && numOfAliveEnemies == 0)
+        else if (gameStarted && numOfAliveEnemies == 0 && !gameOver)
         {
             levelImage.SetActive(true);
             levelText.text = "YOU WON";
