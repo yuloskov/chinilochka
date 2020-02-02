@@ -142,8 +142,6 @@ public class GameManager : MonoBehaviour
             
         }
         
-        Debug.Log(numOfAliveEnemies);
-        
         if (gameStarted && numOfAliveEnemies > 0)
         {
             if (!musicOn)
@@ -203,5 +201,23 @@ public class GameManager : MonoBehaviour
 
         var dist = Vector3.Distance(thisPosition, toPosition);
         return dist;
+    }
+
+    public void Heal(int numOfBoxes)
+    {
+        if (numberOfBoxes == 1)
+        {
+            ToolIcon1.SetActive(false);
+        }
+
+        if (numberOfBoxes == 2)
+        {
+            ToolIcon2.SetActive(false);
+        }
+
+        if (numberOfBoxes == 3)
+        {
+            ToolIcon3.SetActive(false);
+        }
     }
 }

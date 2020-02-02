@@ -16,7 +16,7 @@ public class Robot : CharacterController2D
 
         health = 100;
         speed = 3;
-        attack = 18;
+        attack = 19;
         attackRate = 0.5f;
         passedTime = attackRate;
 

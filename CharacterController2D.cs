@@ -26,8 +26,14 @@ public abstract class CharacterController2D : MonoBehaviour
     
     protected void Move(float h, float v, float speed)
     {
-        Vector2 move = new Vector2(h, v);
-        _controller.Move(move * Time.deltaTime * speed);
+        float y = pos.position.y + v;
+        float x = pos.position.x + h;
+
+        if (y >= -7 && x <= 4.5 && y <= 7.5 && x >= -4.5)
+        {
+            Vector2 move = new Vector2(h, v);
+            _controller.Move(move * Time.deltaTime * speed);
+        }
     }
 
     public bool MoveTo(Transform to, float r)
@@ -42,10 +48,11 @@ public abstract class CharacterController2D : MonoBehaviour
         var yTo = toPosition.y;
 
         var moveVector = new Vector2(-xCur + xTo, -yCur + yTo).normalized;
-
+        
         Move(moveVector.x, moveVector.y, speed);
 
         var dist = Vector3.Distance(thisPosition, toPosition);
+        Debug.Log(thisPosition);
         return (dist < r);
     }
 

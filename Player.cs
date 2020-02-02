@@ -20,7 +20,8 @@ public class Player : CharacterController2D
     void Update()
     {
         if (GameManager.instance.distRobotPlayer() < 2f && numberOfBoxes > 0)
-        {
+        {   
+            GameManager.instance.Heal(numberOfBoxes);
             numberOfBoxes--;
             GameManager.instance.toHeal = 20;
         }
