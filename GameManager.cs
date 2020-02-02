@@ -161,10 +161,13 @@ public class GameManager : MonoBehaviour
                 GameObject.Find("Background").GetComponent<AudioSource>().mute = true;
                 levelImage.SetActive(true);
                 levelText.text = "GAME OVER";
+                
             }
         }
         else if (gameStarted && numOfAliveEnemies == 0 && !gameOver)
         {
+            GameObject.Find("Background").GetComponent<AudioSource>().mute = true;
+
             levelImage.SetActive(true);
             levelText.text = "YOU WON";
         }
