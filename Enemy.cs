@@ -34,7 +34,7 @@ public class Enemy : CharacterController2D
         if (Input.GetButtonDown("Fire1"))
         {
             GameManager.instance.AddEnemyToPriorList(this);
-            PriorityText = GameObject.Find("PriorityText" + prior.ToString()).GetComponent<Text>();
+            PriorityText = GetComponentInChildren<Text>();
             PriorityText.text = prior.ToString();
             PriorityText.transform.position = new Vector3(0.1f, 0.8f, 0) + transform.position;
         }
@@ -44,10 +44,8 @@ public class Enemy : CharacterController2D
     {
         if (GameManager.instance.gameStarted)
         {
-            GameObject PriorityObj = GameObject.Find("PriorityText" + prior.ToString());
-            if (PriorityObj != null)
+            if (PriorityText != null)
             {
-                PriorityText = PriorityObj.GetComponent<Text>();
                 Destroy(PriorityText.gameObject);
             }
         }
